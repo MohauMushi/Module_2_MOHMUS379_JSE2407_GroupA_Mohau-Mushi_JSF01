@@ -139,7 +139,21 @@
     
     <!-- Start Products -->
     <div x-data="products" x-init="fetchProducts()" class="container mx-auto px-8 sm:px-6 lg:px-16 py-6">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      
+      <!-- Error Message -->
+  <div x-show="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+    <strong class="font-bold">Error!</strong>
+    <span class="block sm:inline" x-text="error"></span>
+  </div>
+
+  <!-- Loading Message -->
+  <div x-show="loading" class="text-center py-4">
+    <p class="text-gray-600">Loading products...</p>
+  </div>
+
+      <div
+      x-show="!error"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 
         <!-- Start of Products Skeleton -->
         <template x-for="i in 8">
