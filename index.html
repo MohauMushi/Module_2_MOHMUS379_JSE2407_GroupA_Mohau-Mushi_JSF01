@@ -140,6 +140,24 @@
     <!-- Start Products -->
     <div x-data="products" x-init="fetchProducts()" class="container mx-auto px-8 sm:px-6 lg:px-16 py-6">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+        <!-- Start of Products Skeleton -->
+        <template x-for="i in 8">
+          <div x-show="products.length === 0" class="animate-pulse bg-white border border-slate-200 shadow shadow-slate-950/5 rounded-2xl overflow-hidden">
+            <div class="h-48 bg-gray-400"></div>
+            <div class="p-4">
+              <div class="h-4 bg-gray-400 rounded w-3/4 mb-2"></div>
+              <div class="h-4 bg-gray-400 rounded w-1/2 mb-2"></div>
+              <div class="h-4 bg-gray-400 rounded w-1/4"></div>
+            </div>
+            <div class="p-4 flex justify-between items-center">
+              <div class="h-6 bg-gray-400 rounded w-1/4"></div>
+              <div class="h-8 bg-gray-400 rounded w-1/3"></div>
+            </div>
+          </div>
+        </template>
+        <!-- End of Products Skeleton -->
+
         <template x-for="product in products" :key="product.id">
           <div
           @click="openModal(product)" 
