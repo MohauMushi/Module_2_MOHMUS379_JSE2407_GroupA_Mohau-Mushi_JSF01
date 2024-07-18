@@ -141,7 +141,8 @@
     <div x-data="products" x-init="fetchProducts()" class="container mx-auto px-8 sm:px-6 lg:px-16 py-6">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         <template x-for="product in products" :key="product.id">
-          <div class="flex flex-col h-full bg-white border border-slate-200 shadow shadow-slate-950/5 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-lg">
+          <div
+          class="cursor-pointer flex flex-col h-full bg-white border border-slate-200 shadow shadow-slate-950/5 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-lg">
               <img :src="product.image" :alt="product.title" class="object-contain flex-shrink-0 p-4 w-full h-48">
             <div class="flex-grow p-4 flex flex-col justify-between">
               <div>
@@ -177,7 +178,40 @@
           </div>
         </template>
       </div>
-    </div>
+
+      <!-- Modal -->
+      <div
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+        <div
+         class="bg-white rounded-lg shadow-md relative w-full max-w-4xl max-h-[90vh] overflow-y-auto" @click.stop>
+          <button @click="closeModal()" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800 z-10">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <div class="p-6 sm:p-8">
+            <div class="flex flex-col md:flex-row">
+              <div class="md:w-1/2 mb-4 md:mb-0 md:mr-4">
+                <img :src="selectedProduct.image" :alt="selectedProduct.title" class="w-full h-64 object-contain">
+              </div>
+              <div class="md:w-1/2">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold mb-3" x-text="selectedProduct.title"></h2>
+                <div class="flex items-center mb-2">
+                  <span class="text-yellow-400 mr-1">★</span>
+                  <span x-text="`${selectedProduct.rating?.rate} (${selectedProduct.rating?.count} reviews)`"></span>
+                </div>
+                <p class="text-gray-500 px-2 py-1 bg-indigo-100 rounded-md text-xs font-medium mb-2 inline-block" x-text="selectedProduct.category"></p>
+                <p class="text-black font-bold mb-2 text-xl" x-text="`$${selectedProduct.price}`"></p>
+                <button class="inline-flex items-center justify-center px-3 py-2 mt-2 bg-indigo-600 text-white text-sm font-medium rounded-md hover:bg-indigo-700 transition-colors duration-300">
+                  Add To Cart
+                </button>
+                <h3 class="text-black font-semibold mt-4 mb-2">Description</h3>
+                <p class="text-gray-600" x-text="selectedProduct.description"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <!-- End Products -->
 
