@@ -7,6 +7,8 @@ window.Alpine = Alpine;
 document.addEventListener("alpine:init", () => {
   Alpine.data("products", () => ({
     products: [],
+	modalOpen: false,
+	selectedProduct: {},
     async fetchProducts() {
       const result = await fetchSingleProduct();
       if (result.response) {
@@ -15,6 +17,13 @@ document.addEventListener("alpine:init", () => {
         console.error("Error fetching products:", result.error);
       }
     },
+	openModal(product) {
+		this.selectedProduct = product;
+		this.modalOpen = true;
+	  },
+	  closeModal() {
+		this.modalOpen = false;
+	  }
   }));
 });
 
