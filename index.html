@@ -134,6 +134,53 @@
         </div>
       </nav>
     </header>
+
+
+    
+    <!-- Start Products -->
+    <div x-data="products" x-init="fetchProducts()" class="container mx-auto px-8 sm:px-6 lg:px-16 py-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <template x-for="product in products" :key="product.id">
+          <div class="flex flex-col h-full bg-white border border-slate-200 shadow shadow-slate-950/5 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-lg">
+              <img :src="product.image" :alt="product.title" class="object-contain flex-shrink-0 p-4 w-full h-48">
+            <div class="flex-grow p-4 flex flex-col justify-between">
+              <div>
+                <h2 class="text-lg font-semibold mb-1 text-gray-800 line-clamp-2" x-text="product.title"></h2>
+                <p class="text-xl font-bold text-indigo-600 mb-2" x-text="`$${product.price.toFixed(2)}`"></p>
+              </div>
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2 space-y-2 sm:space-y-0">
+                <span class="px-2 py-1 bg-indigo-100 text-indigo-800 rounded-md text-xs font-medium" x-text="product.category"></span>
+                <div class="flex items-center space-x-2">
+                  <button class="p-1  rounded-full transition-colors duration-300">
+                    <svg
+                      class="h-6 w-6  hover:text-red-500"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"
+                      />
+                    </svg>
+                  </button>
+                  <button class="inline-flex items-center justify-center px-3 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md hover:bg-indigo-700 transition-colors duration-300">
+                    Add To Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <!-- End Products -->
+
     <script type="module" src="./src/main.js"></script>
   </body>
 </html>
