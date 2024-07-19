@@ -11,6 +11,7 @@ document.addEventListener("alpine:init", () => {
     categories: [],
     selectedCategory: "",
     sortOrder: "",
+    searchTerm: "",
     modalOpen: false,
     selectedProduct: {},
     loading: true,
@@ -52,9 +53,11 @@ document.addEventListener("alpine:init", () => {
 
     applyFiltersAndSort() {
       this.filteredProducts = this.products.filter(
-        (product) =>
-          this.selectedCategory === "" ||
-          product.category === this.selectedCategory
+        product =>
+          (this.selectedCategory === "" ||
+            product.category === this.selectedCategory) &&
+          (this.searchTerm === "" ||
+            product.title.toLowerCase().includes(this.searchTerm.toLowerCase()))
       );
 
       if (this.sortOrder === "asc") {
