@@ -10,6 +10,7 @@ document.addEventListener("alpine:init", () => {
     filteredProducts: [],
     categories: [],
     selectedCategory: "",
+    sortOrder: "",
     modalOpen: false,
     selectedProduct: {},
     loading: true,
@@ -56,6 +57,11 @@ document.addEventListener("alpine:init", () => {
           product.category === this.selectedCategory
       );
 
+      if (this.sortOrder === "asc") {
+        this.filteredProducts.sort((a, b) => a.price - b.price);
+      } else if (this.sortOrder === "desc") {
+        this.filteredProducts.sort((a, b) => b.price - a.price);
+      }
     },
 
     async openModal(product) {
