@@ -1,7 +1,7 @@
 import "../style.css";
 import Alpine from "alpinejs";
 import { getCategory } from "./data/getCategories";
-import { getProducts } from "./data/getProducts"
+import { getProducts } from "./data/getProducts";
 
 window.Alpine = Alpine;
 
@@ -16,6 +16,7 @@ document.addEventListener("alpine:init", () => {
     modalOpen: false,
     selectedProduct: {},
     loading: true,
+    modalLoading: false,
     error: null,
 
     async init() {
@@ -46,7 +47,7 @@ document.addEventListener("alpine:init", () => {
 
     applyFiltersAndSort() {
       this.filteredProducts = this.products.filter(
-        product =>
+        (product) =>
           (this.selectedCategory === "" ||
             product.category === this.selectedCategory) &&
           (this.searchTerm === "" ||
@@ -60,12 +61,26 @@ document.addEventListener("alpine:init", () => {
       }
     },
 
-    async openModal(product) {
-      this.selectedProduct = product;
+    async openModal(productId) {
       this.modalOpen = true;
+      this.modalLoading = true;
+      try {
+        const response = await fetch(
+          `https://fakestoreapi.com/products/${productId}`
+        );
+        if (!response.ok) throw new Error("Failed to fetch product details");
+        this.selectedProduct = await response.json();
+      } catch (error) {
+        console.error("Error fetching product details:", error);
+        this.error = "Failed to load product details. Please try again.";
+      } finally {
+        this.modalLoading = false;
+      }
     },
+
     closeModal() {
       this.modalOpen = false;
+      this.selectedProduct = {};
     },
   }));
 });
