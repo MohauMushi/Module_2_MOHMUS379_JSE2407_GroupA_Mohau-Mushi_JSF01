@@ -1,6 +1,7 @@
 import "../style.css";
 import Alpine from "alpinejs";
-import { fetchSingleProduct } from "./data/getProducts";
+import { getCategory } from "./data/getCategories";
+import { getProducts } from "./data/getProducts"
 
 window.Alpine = Alpine;
 
@@ -24,13 +25,8 @@ document.addEventListener("alpine:init", () => {
 
     async fetchCategories() {
       try {
-        const response = await fetch(
-          "https://fakestoreapi.com/products/categories"
-        );
-        if (!response.ok) throw new Error("Failed to fetch categories");
-        this.categories = await response.json();
+        this.categories = await getCategory.fetchCategories();
       } catch (error) {
-        console.error("Error fetching categories:", error);
         this.error = "Failed to load categories. Please try again.";
       }
     },
@@ -39,12 +35,9 @@ document.addEventListener("alpine:init", () => {
       this.loading = true;
       this.error = null;
       try {
-        const response = await fetch("https://fakestoreapi.com/products");
-        if (!response.ok) throw new Error("Failed to fetch products");
-        this.products = await response.json();
+        this.products = await getProducts.fetchProducts();
         this.applyFiltersAndSort();
       } catch (error) {
-        console.error("Error fetching products:", error);
         this.error = "Failed to load products. Please try again.";
       } finally {
         this.loading = false;
