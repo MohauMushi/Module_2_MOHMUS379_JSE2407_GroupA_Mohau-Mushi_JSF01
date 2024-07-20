@@ -14,7 +14,7 @@ document.addEventListener("alpine:init", () => {
     sortOrder: "",
     searchTerm: "",
     modalOpen: false,
-    // selectedProduct: {},
+    selectedProduct: {},
     loading: true,
     modalLoading: false,
     error: null,
