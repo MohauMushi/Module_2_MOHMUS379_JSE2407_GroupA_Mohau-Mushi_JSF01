@@ -233,7 +233,7 @@
               <img :src="product.image" :alt="product.title" class="object-contain flex-shrink-0 p-4 w-full h-48">
             <div class="flex-grow p-4 flex flex-col justify-between">
               <div>
-                <h2 class="text-lg font-semibold mb-1 text-gray-800 line-clamp-2" x-text="product.title"></h2>
+                <h2 class="text-lg font-bold mb-1 text-gray-900 line-clamp-2" x-text="product.title"></h2>
                 <div class="flex items-center mb-2">
                   <template x-for="i in 5">
                     <svg class="w-5 h-5" :class="i <= Math.round(product.rating.rate) ? 'text-yellow-400' : 'text-gray-300'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -241,10 +241,10 @@
                     </svg>
                   </template>
                 </div>
-                <p class="text-xl font-bold text-indigo-600 mb-2" x-text="`$${product.price.toFixed(2)}`"></p>
+                <p class="text-xl font-bold text-[#415a77] mb-2" x-text="`$${product.price.toFixed(2)}`"></p>
               </div>
               <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2 space-y-2 sm:space-y-0">
-                <span class="px-2 py-1 bg-indigo-100 text-indigo-800 rounded-md text-xs font-medium" x-text="product.category"></span>
+                <span class="px-2 py-1 bg-indigo-100 text-[#415a77] rounded-md text-xs font-medium" x-text="product.category"></span>
                 <div class="flex items-center space-x-2">
                   <button class="p-1  rounded-full transition-colors duration-300">
                     <svg
@@ -263,7 +263,7 @@
                       />
                     </svg>
                   </button>
-                  <button class="inline-flex items-center justify-center px-3 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md hover:bg-indigo-700 transition-colors duration-300">
+                  <button class="inline-flex items-center justify-center px-3 py-2 bg-[#415a77] text-white text-sm font-medium rounded-md hover:bg-indigo-700 transition-colors duration-300">
                     Add To Cart
                   </button>
                 </div>
