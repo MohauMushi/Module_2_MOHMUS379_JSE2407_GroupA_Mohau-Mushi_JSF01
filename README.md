@@ -1,6 +1,8 @@
 # FluxStore
 
 FluxStore is a modern, responsive e-commerce web application built with Alpine.js and Tailwind CSS. It provides a seamless shopping experience with features like product filtering, sorting, and detailed product views.
+![FluxStore Home Page](./src/assets/FluxStore_HomePage.png)
+![FluxStore Modal](./src/assets/FluxStore_Modal.png)
 
 ## Table of Contents
 
