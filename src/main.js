@@ -5,25 +5,50 @@ import { getProducts } from "./data/getProducts";
 
 window.Alpine = Alpine;
 
+/**
+ * @namespace productsData
+ * @description Alpine.js data object for managing product-related functionality.
+ */
 document.addEventListener("alpine:init", () => {
   Alpine.data("products", () => ({
+    /** @type {Array} Array of all products */
     products: [],
+    /** @type {Array} Array of filtered products based on user selection */
     filteredProducts: [],
+    /** @type {Array} Array of product categories */
     categories: [],
+    /** @type {string} Currently selected category */
     selectedCategory: "",
+    /** @type {string} Current sort order */
     sortOrder: "",
+    /** @type {string} Current search term */
     searchTerm: "",
+    /** @type {boolean} Flag to control modal visibility */
     modalOpen: false,
+    /** @type {Object} Currently selected product for modal display */
     selectedProduct: {},
+    /** @type {boolean} Flag to indicate loading state */
     loading: true,
+    /** @type {boolean} Flag to indicate modal loading state */
     modalLoading: false,
+    /** @type {null} Error message */
     error: null,
 
+    /**
+     * @function init
+     * @memberof productsData
+     * @description Initializes the application by fetching categories and products.
+     */
     async init() {
       await this.fetchCategories();
       await this.fetchProducts();
     },
 
+    /**
+     * @function fetchCategories
+     * @memberof productsData
+     * @description Fetches product categories from the API.
+     */
     async fetchCategories() {
       try {
         this.categories = await getCategory.fetchCategories();
@@ -32,6 +57,11 @@ document.addEventListener("alpine:init", () => {
       }
     },
 
+    /**
+     * @function fetchProducts
+     * @memberof productsData
+     * @description Fetches products from the API and applies initial filters.
+     */
     async fetchProducts() {
       this.loading = true;
       this.error = null;
@@ -45,6 +75,11 @@ document.addEventListener("alpine:init", () => {
       }
     },
 
+    /**
+     * @function applyFiltersAndSort
+     * @memberof productsData
+     * @description Applies category and search filters, and sorts the products.
+     */
     applyFiltersAndSort() {
       this.filteredProducts = this.products.filter(
         (product) =>
@@ -61,6 +96,12 @@ document.addEventListener("alpine:init", () => {
       }
     },
 
+    /**
+     * @function openModal
+     * @memberof productsData
+     * @description Opens the product detail modal and fetches detailed product information.
+     * @param {number} productId - The ID of the product to display in the modal.
+     */
     async openModal(productId) {
       this.modalOpen = true;
       this.modalLoading = true;
@@ -78,6 +119,11 @@ document.addEventListener("alpine:init", () => {
       }
     },
 
+    /**
+     * @function closeModal
+     * @memberof productsData
+     * @description Closes the product detail modal.
+     */
     closeModal() {
       this.modalOpen = false;
       // this.selectedProduct = {};
